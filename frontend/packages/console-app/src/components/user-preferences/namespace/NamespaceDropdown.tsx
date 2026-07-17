@@ -196,7 +196,8 @@ const NamespaceDropdown: FC = () => {
       menu={namespaceMenu}
       menuRef={menuRef}
       isOpen={dropdownOpen}
-      title={selected}
+      displayValue={selected}
+      isSelectToggle={false}
       onToggle={onToggle}
       data-test={'dropdown console.preferredNamespace'}
       className="co-user-preference__namespace-menu-toggle"

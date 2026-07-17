@@ -17,12 +17,14 @@
 .co-namespace-bar {
   border-bottom: var(--pf-t--global--border--width--divider--default) solid
     var(--pf-t--global--border--color--default);
-  padding: 0 $pf-v6-global-gutter-x;
+  padding: var(--pf-t--global--spacer--sm) $pf-v6-global-gutter-x;
   white-space: nowrap;
 
   &__items {
     align-items: center;
     display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
 
     .pf-m-plain {
       color: inherit;

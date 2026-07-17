@@ -373,7 +373,8 @@ export const NamespaceDropdown: FC<NamespaceDropdownProps> = ({
   const [isOpen, setOpen] = useState(false);
   const allNamespacesTitle = isProjects ? t('All Projects') : t('All Namespaces');
 
-  const title = selected === ALL_NAMESPACES_KEY ? allNamespacesTitle : selected;
+  const displayValue = selected === ALL_NAMESPACES_KEY ? allNamespacesTitle : selected;
+  const labelPrefix = isProjects ? t('Project') : t('Namespace');
 
   const menuProps = {
     setOpen,
@@ -393,7 +394,8 @@ export const NamespaceDropdown: FC<NamespaceDropdownProps> = ({
         menu={<NamespaceMenu {...menuProps} />}
         menuRef={menuRef}
         isOpen={isOpen}
-        title={`${isProjects ? t('Project') : t('Namespace')}: ${title}`}
+        labelPrefix={labelPrefix}
+        displayValue={displayValue}
         onToggle={(menuState) => {
           setOpen(menuState);
         }}

@@ -9,11 +9,24 @@ const NamespaceMenuToggle = (props: {
   menuRef: RefObject<HTMLElement>;
   isOpen: boolean;
   shortCut?: string;
-  title: string;
+  displayValue: string;
+  labelPrefix?: string;
+  isSelectToggle?: boolean;
   onToggle: (state: boolean) => void;
   className?: string;
 }) => {
-  const { menu, isOpen, shortCut, title, onToggle, disabled, menuRef, className } = props;
+  const {
+    menu,
+    isOpen,
+    shortCut,
+    labelPrefix,
+    displayValue,
+    isSelectToggle = true,
+    onToggle,
+    disabled,
+    menuRef,
+    className,
+  } = props;
 
   const toggleRef = useRef(null);
   const containerRef = useRef(null);
@@ -67,29 +80,53 @@ const NamespaceMenuToggle = (props: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // This needs to be run only on component mount/unmount
 
+  const ariaLabel = labelPrefix ? `${labelPrefix}: ${displayValue}` : displayValue;
+
   const toggle = (
     <MenuToggle
       ref={toggleRef}
       onClick={() => onToggle(!isOpen)}
       isExpanded={isOpen}
       disabled={disabled}
-      className={css('co-namespace-dropdown__menu-toggle', className)}
+      aria-label={ariaLabel}
+      className={css(
+        'co-namespace-dropdown__menu-toggle',
+        { 'co-namespace-dropdown__menu-toggle--select': isSelectToggle },
+        className,
+      )}
     >
-      {title}
+      {isSelectToggle ? (
+        <span className="co-namespace-dropdown__toggle-value">{displayValue}</span>
+      ) : (
+        displayValue
+      )}
     </MenuToggle>
   );
 
+  const showExternalLabel = isSelectToggle && labelPrefix;
+
   return (
-    <div ref={containerRef}>
-      <Popper
-        trigger={toggle}
-        popper={menu}
-        direction="down"
-        position="left"
-        appendTo={containerRef.current}
-        isVisible={isOpen}
-        enableFlip={false}
-      />
+    <div
+      className={css('co-namespace-dropdown__selector', {
+        'co-namespace-dropdown__selector--with-label': showExternalLabel,
+      })}
+    >
+      {showExternalLabel ? (
+        <span className="co-namespace-dropdown__selector-label" id="co-namespace-dropdown-label">
+          {labelPrefix}:
+        </span>
+      ) : null}
+      <div ref={containerRef} className="co-namespace-dropdown__selector-control">
+        <Popper
+          trigger={toggle}
+          popper={menu}
+          direction="down"
+          position="left"
+          appendTo={containerRef.current}
+          isVisible={isOpen}
+          enableFlip={false}
+        />
+      </div>
     </div>
   );
 };
