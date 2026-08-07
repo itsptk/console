@@ -20,13 +20,9 @@
 .co-namespace-dropdown__selector-label {
   color: var(--pf-t--global--text--color--regular);
   flex: 0 0 auto;
-  font-size: 16px;
+  font-size: var(--pf-t--global--font--size--body--lg);
   font-weight: var(--pf-t--global--font--weight--body--bold);
   white-space: nowrap;
-
-  @media (min-width: $pf-v6-global--breakpoint--md) {
-    font-size: 17px;
-  }
 }
 
 .co-namespace-dropdown__selector-control {
@@ -86,40 +82,17 @@
 }
 
 // Select-style toggle used in the namespace bar.
+// Intentionally inherits default PatternFly MenuToggle border/background tokens
+// (same as the perspective/core-platform switcher) — only size + value weight differ.
 .pf-v6-c-menu-toggle.co-namespace-dropdown__menu-toggle--select {
-  --pf-v6-c-menu-toggle--PaddingBlockStart: var(--pf-t--global--spacer--control--vertical--default);
-  --pf-v6-c-menu-toggle--PaddingBlockEnd: var(--pf-t--global--spacer--control--vertical--default);
-  --pf-v6-c-menu-toggle--PaddingInlineStart: var(--pf-t--global--spacer--control--horizontal--default);
-  --pf-v6-c-menu-toggle--PaddingInlineEnd: var(--pf-t--global--spacer--control--horizontal--default);
-  --pf-v6-c-menu-toggle--BackgroundColor: var(--pf-t--global--background--color--control--default);
-  --pf-v6-c-menu-toggle--BorderColor: var(--pf-t--global--border--color--default);
-  --pf-v6-c-menu-toggle--Color: var(--pf-t--global--text--color--regular);
-  --pf-v6-c-menu-toggle--FontSize: 16px;
-  font-size: 16px;
+  --pf-v6-c-menu-toggle--FontSize: var(--pf-t--global--font--size--body--lg);
+  font-size: var(--pf-t--global--font--size--body--lg);
   width: 100%;
-
-  @media (min-width: $pf-v6-global--breakpoint--md) {
-    --pf-v6-c-menu-toggle--FontSize: 17px;
-    font-size: 17px;
-  }
-
-  &:hover:not(:disabled) {
-    --pf-v6-c-menu-toggle--BackgroundColor: var(
-      --pf-t--global--background--color--control--hover
-    );
-  }
-
-  &:disabled {
-    --pf-v6-c-menu-toggle--BackgroundColor: var(
-      --pf-t--global--background--color--disabled--default
-    );
-    --pf-v6-c-menu-toggle--Color: var(--pf-t--global--text--color--disabled);
-  }
 }
 
 .co-namespace-dropdown__toggle-value {
   display: block;
-  font-size: 16px;
+  font-size: inherit;
   font-weight: var(--pf-t--global--font--weight--body--bold);
   min-width: 0;
   overflow: hidden;
@@ -127,8 +100,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-
-  @media (min-width: $pf-v6-global--breakpoint--md) {
-    font-size: 17px;
-  }
 }
